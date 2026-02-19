@@ -1,0 +1,19 @@
+package bekezhan.io.task5.entity;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class ApiResponse {
+    private String status;
+    private String message;
+    @Builder.Default
+    private Long timestamp = System.currentTimeMillis();
+    private Long processingTime;
+    private Object data;
+}
