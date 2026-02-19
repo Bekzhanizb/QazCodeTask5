@@ -1,8 +1,18 @@
+server:
+  port: 8080
+  shutdown: graceful
+
+spring:
+  application:
+    name: task5-observable-service
+  lifecycle:
+    timeout-per-shutdown-phase: 20s
+
 management:
   endpoints:
     web:
       exposure:
-        include: health,info,metrics
+        include: health,info,metrics,loggers,prometheus
   endpoint:
     health:
       show-details: always

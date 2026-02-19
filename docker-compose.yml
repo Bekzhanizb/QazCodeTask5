@@ -6,3 +6,4 @@ services:
     container_name: task5-observable-service
     ports:
       - "8080:8080"
+    stop_grace_period: 30s
