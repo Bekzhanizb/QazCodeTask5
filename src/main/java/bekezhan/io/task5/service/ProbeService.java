@@ -1,5 +1,6 @@
 package bekezhan.io.task5.service;
 
+import jakarta.annotation.PostConstruct;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +10,21 @@ public class ProbeService {
 
     public ProbeService(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @PostConstruct
+    public void initTable() {
+        jdbcTemplate.execute("""
+                CREATE TABLE IF NOT EXISTS service_probe_data (
+                    id BIGINT PRIMARY KEY,
+                    value VARCHAR(255) NOT NULL
+                )
+                """);
+        jdbcTemplate.update("""
+                INSERT INTO service_probe_data (id, value)
+                VALUES (1, 'db-ok')
+                ON CONFLICT (id) DO NOTHING
+                """);
     }
 
     public String slowSelect() {
